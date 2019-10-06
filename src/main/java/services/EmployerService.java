@@ -68,6 +68,22 @@ public class EmployerService {
     }
 
     /**
+     * @param employer selected emploter
+     */
+    public void addEmployer(Employer employer) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("INSERT INTO employee VALUES (?,?)");
+            preparedStatement.setString(1, employer.getEmployerName());
+            preparedStatement.setString(2, employer.getPosition());
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            logger.error("Check Table Name, ID number");
+        }
+    }
+
+    /**
      * @param employerId ID number of selected employer
      */
     public void deleteEmployer(int employerId) {

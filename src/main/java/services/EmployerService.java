@@ -37,8 +37,33 @@ public class EmployerService {
             }
             connection.close();
         } catch (SQLException e) {
-            logger.error("Check database name, Table Name, Column order");
+            logger.error("Check Table Name, Column order,Column Names");
         }
         return employerList;
+    }
+
+    /**
+     * @param employerId represents the ID of the selected employer
+     * @return selected employer object
+     */
+    public Employer getEmployer(int employerId) {
+        Employer employer = new Employer();
+
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("SELECT * FROM employee WHERE employerId=?");
+            preparedStatement.setInt(1, employerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                employer.setEmployerId(resultSet.getInt(1));
+                employer.setEmployerName(resultSet.getString(2));
+                employer.setPosition(resultSet.getString(3));
+            }
+            connection.close();
+        } catch (SQLException e) {
+            logger.error("Check Table Name, Column order,Column Names");
+        }
+
+        return employer;
     }
 }

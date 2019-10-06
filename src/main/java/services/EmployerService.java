@@ -37,7 +37,7 @@ public class EmployerService {
             }
             connection.close();
         } catch (SQLException e) {
-            logger.error("Check Table Name, Column order,Column Names");
+            logger.error("Check Table Name");
         }
         return employerList;
     }
@@ -61,9 +61,24 @@ public class EmployerService {
             }
             connection.close();
         } catch (SQLException e) {
-            logger.error("Check Table Name, Column order,Column Names");
+            logger.error("Check Table Name, ID number");
         }
 
         return employer;
+    }
+
+    /**
+     * @param employerId ID number of selected employer
+     */
+    public void deleteEmployer(int employerId) {
+        try {
+            PreparedStatement preparedStatement = connection
+                    .prepareStatement("DELETE FROM employee WHERE employerId=?");
+            preparedStatement.setInt(1, employerId);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            logger.error("Check Table Name, ID number");
+        }
     }
 }

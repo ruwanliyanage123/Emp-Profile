@@ -81,4 +81,21 @@ public class EmployerService {
             logger.error("Check Table Name, ID number");
         }
     }
+
+    /**
+     * @param employer selected employer who need to update
+     */
+    public void updateEmployer(Employer employer) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "UPDATE employee SET employerName=?, position =? WHERE employerId=?");
+            preparedStatement.setString(1, employer.getEmployerName());
+            preparedStatement.setString(2, employer.getPosition());
+            preparedStatement.setInt(3, employer.getEmployerId());
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            logger.error("Check Table Name, ID number");
+        }
+    }
 }

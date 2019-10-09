@@ -5,6 +5,7 @@ import Connection.DatabaseConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -77,10 +78,10 @@ public class EmployerService {
     /**
      * @param employer selected emploter
      */
-    public void addEmployer(Employer employer) {
+    public void addEmployer(@NotNull Employer employer) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("INSERT INTO employee VALUES (?,?)");
+                    .prepareStatement("INSERT INTO employee(employerName,position) VALUES (?,?)");
             preparedStatement.setString(1, employer.getEmployerName());
             preparedStatement.setString(2, employer.getPosition());
             preparedStatement.executeUpdate();

@@ -14,16 +14,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("employees")
+@Path("office")
+@Produces(MediaType.APPLICATION_JSON)
 public class EmpoyerController {
+
     private EmployerService employerService;
-    EmpoyerController(){
+    public EmpoyerController(){
         employerService = new EmployerService();
     }
 
     @GET
     @Path("employee")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Employer> getAllEmployers(){
         return employerService.getAllEmployers();
     }

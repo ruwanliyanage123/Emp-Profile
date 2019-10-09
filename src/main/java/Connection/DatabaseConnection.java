@@ -20,7 +20,7 @@ public class DatabaseConnection {
      */
     private DatabaseConnection() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             String username = "root";
             String password = "19940306";
             String url = "jdbc:mysql://localhost:3306/employees";

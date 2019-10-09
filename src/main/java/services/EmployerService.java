@@ -15,8 +15,12 @@ import java.util.List;
 public class EmployerService {
 
     private static Logger logger = LoggerFactory.getLogger(EmployerService.class);
-    private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
-    private Connection connection = databaseConnection.getConnection();
+    private Connection connection;
+
+    public EmployerService() {
+        DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
+        connection = databaseConnection.getConnection();
+    }
 
     /**
      * get all employers from database
@@ -30,10 +34,13 @@ public class EmployerService {
                     .prepareStatement("SELECT * FROM employee");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+
                 Employer employer = new Employer();
                 employer.setEmployerId(resultSet.getInt(1));
                 employer.setEmployerName(resultSet.getString(2));
                 employer.setPosition(resultSet.getString(3));
+
+                employerList.add(employer);
             }
             connection.close();
         } catch (SQLException e) {
